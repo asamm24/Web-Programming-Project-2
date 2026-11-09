@@ -1,13 +1,13 @@
 /*
  * Module profile.js
- * Controller for dynamically rendering user profile headers, timelines, replies, and favorites
+ * Controller for dynamically rendering user profile headers and timelines replies, and favorites
  */
 
 import { getUserProfile, getUserTimeline, getUserFavorites } from "./api.js";
 import { parseHTML } from "./html-utils.js";
 
 /**
- * Loads and also renders a user's profile header, timeline, replies, and favorites data inthe skeleton
+ * Loads and also renders a users profile header, timeline, replies, and favorites data inthe skeleton
  * @param {string} username The backend username key (like the "kevinaangstadt", "ed", "choongsool", "ltorrey")
  */
 export async function loadProfile(username) {
