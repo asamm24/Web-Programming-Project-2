@@ -1,0 +1,15 @@
+References for CS-332 Project 2 (SlugFest)
+
+Course materials
+- Angstadt, K. CS-332 Web Programming, Fall 2026. Project 2 specification, skeleton HTML files, API JSON data and profile images (p2_assets.zip). https://myslu.stlawu.edu/~kangstadt/teaching/fall26/332/p2.html
+- Angstadt, K. CS-332 lecture notes and in-class examples (html-utils.js: parseHTML, wait).
+
+Libraries
+- Bootstrap 5 and Bootstrap Icons, loaded from cdn.jsdelivr.net. https://getbootstrap.com/docs/5.3/
+- MDN Web Docs: fetch API, ES modules, Array.prototype.sort/map, Promise.all, Date.toLocaleString. https://developer.mozilla.org/
+
+Tools
+- Claude (Anthropic) was used to help draft the slime trail page code and this file; the team reviewed it.
+- Team work split drafted with AI assistance (see group chat).
+
+(Teammates: add anything else you used.)
