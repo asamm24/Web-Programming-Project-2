@@ -4,7 +4,7 @@
  */
 
 import { getUserProfile, getUserTimeline, getUserFavorites } from "./api.js";
-import { parseHTML } from "./html-utils.js";
+import { parseHTML } from "../html-utils.js";
 
 /**
  * Loads and also renders a users profile header, timeline, replies, and favorites data inthe skeleton
