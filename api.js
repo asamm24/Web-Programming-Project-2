@@ -30,3 +30,14 @@ export async function getUserFavorites(username) {
         return [];
     }
 }
+// main feed api call
+export async function getHomeTimeline() {
+    try {
+        const response = await fetch(`api/statuses/home_timeline.json`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error(`Failed to fetch home timeline:`, error);
+        return [];
+    }
+}
