@@ -27,7 +27,7 @@ function createNotificationCard(item) {
     const screenName = rawScreenName.startsWith('@') ? rawScreenName : `@${rawScreenName}`;
     const cleanScreenName = rawScreenName.replace('@', '').toLowerCase(); 
 
-    const profileLink = profilePageMap[screenName] || profilePageMap[cleanScreenName] || "#";
+    const profileLink = profilePageMap[screenName] || profilePageMap[cleanScreenName] || null;
 
     // Avatar URL 
     let avatarUrl = actor.profile_image_url || avatarMap[cleanScreenName] || "assets/profile/kevin.jpeg"; 
@@ -58,6 +58,14 @@ function createNotificationCard(item) {
         previewText = item.text || "";
     }
 
+    // render links only when a valid page exists 
+    const avatarHtml = profileLink 
+        ? `<a href="${profileLink}"> <img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${name}"></a>`
+        : `<img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${name}">`;
+
+    const actorNameHtml = profileLink 
+        ? `<a href="${profileLink}" class="text-dark fw-bold text-decoration-none">${actorName}</a>`
+        : `<span class="text-dark fw-bold">${actorName}</span>`;
 
     // Build the DOM node
     const card = document.createElement("div"); 
@@ -71,14 +79,12 @@ function createNotificationCard(item) {
             </div>
             
             <!-- Actor Avatar -->
-            <a href="${profileLink}" class="me-3">
-                <img src="${avatarUrl}" class="rounded-circle border" width="42" height="42" alt="${actorName}">
-            </a>
+            ${avatarHtml}
 
             <!-- Content Details -->
             <div class="flex-grow-1">
                 <div class="mb-1">
-                    <a href="${profileLink}" class="text-dark fw-bold text-decoration-none">${actorName}</a>
+                    ${actorNameHtml}
                     <span class="text-muted ms-1">${actionText}</span>
                 </div>
                 ${previewText ? `<p class="text-muted mb-0 border-start ps-3 py-1 bg-light rounded">${previewText}</p>` : ""}
