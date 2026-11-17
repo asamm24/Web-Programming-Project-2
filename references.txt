@@ -12,4 +12,19 @@ Tools
 - Claude (Anthropic) was used to help draft the slime trail page code and this file; the team reviewed it.
 - Team work split drafted with AI assistance (see group chat).
 
-(Teammates: add anything else you used.)
+Ariana: 
+Websites 
+- https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+- https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+- https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+- https://getbootstrap.com/docs/5.3/components/card/
+- https://icons.getbootstrap.com/
+Gemini 
+- I used to help break down how fetch(), document.createElement() and appendChild() works with examples to help me better understand how exactly it turns HTML from static to a dynamic page with JSON files. 
+- I was struggling to export a reuseable helper function from one JS file and importing it to another page, so I had prompted Gemini to breakdown how <script type="module"> is used in code to do that. 
+- I kept getting a 404 error when I would try to fetch JSON files and loadin in images into Chrome, so I had to use a few prompts to understand why my paths were not working and how to figure out where files are/ the structure of my directory. 
+- I was struggling to use the ternary operator inside the JS files combined with how rendering an <a> tag would work in the case that the profile URL exists and how it could fall back on a <span> tag when it's null, so I had asked Gemini how to use the ternary operator with examples. 
+
