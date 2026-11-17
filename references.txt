@@ -28,3 +28,16 @@ Gemini
 - I kept getting a 404 error when I would try to fetch JSON files and loadin in images into Chrome, so I had to use a few prompts to understand why my paths were not working and how to figure out where files are/ the structure of my directory. 
 - I was struggling to use the ternary operator inside the JS files combined with how rendering an <a> tag would work in the case that the profile URL exists and how it could fall back on a <span> tag when it's null, so I had asked Gemini how to use the ternary operator with examples. 
 
+Manti:
+Created slime.html  and slime-trail.js, which fetch the slime with ID 611fcaf640148d94e2a469c7 and its replies and display them as cards.
+Websites
+- Bootstrap 5.3, Get started (adding Bootstrap's CSS and JS bundle to slime.html from the cdn.jsdelivr.net CDN): https://getbootstrap.com/docs/5.3/getting-started/introduction/
+- Bootstrap 5.3, Navbar (the fixed-top navbar with a collapsing menu): https://getbootstrap.com/docs/5.3/components/navbar/
+- Bootstrap 5.3, Cards,the slime and reply cards: https://getbootstrap.com/docs/5.3/components/card/
+- Bootstrap 5.3, Flex utilities (the d-flex layout of the picture and text inside each card): https://getbootstrap.com/docs/5.3/utilities/flex/
+- Bootstrap Icons 1.11 (the reply, reslime and favorite icons): https://icons.getbootstrap.com/
+- MDN, Using the Fetch API (loading the slime and replies JSON): https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+- MDN, JavaScript modules (importing loadSlimeTrail from slime-trail.js into slime.html): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+- MDN, Date.prototype.toLocaleString (showing the date on each slime): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
+Claude Code
+- After I created slime.html, I used Claude Code to help fix it, including the navbar overlapping the top of the page content and the navbar links on the page not working.
