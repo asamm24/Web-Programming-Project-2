@@ -5,15 +5,21 @@
 
 // ----- getting the data -----
 
-// get one slime from the api folder
+// get one slime from the api folder (null if there is no slime with that id)
 async function getSlime(id) {
     const response = await fetch("api/statuses/show/" + id + ".json");
+    if (!response.ok) {
+        return null;
+    }
     return await response.json();
 }
 
-// get the list of replies to a slime
+// get the list of replies to a slime (an empty list if they can't be loaded)
 async function getReplies(id) {
     const response = await fetch("api/statuses/replies/" + id + ".json");
+    if (!response.ok) {
+        return [];
+    }
     return await response.json();
 }
 
@@ -53,10 +59,20 @@ function createSlimeCard(slime, isMain) {
 // ----- putting it on the page -----
 
 export async function loadSlimeTrail(id) {
-    const slime = await getSlime(id);
-    const replies = await getReplies(id);
+    const found = await getSlime(id);
+    const mainDiv = document.querySelector("#main-slime");
 
-    document.querySelector("#main-slime").append(createSlimeCard(slime, true));
+    // no slime with that id, so say so instead of leaving the page blank
+    if (!found) {
+        mainDiv.innerHTML = '<div class="alert alert-warning">That slime could not be found.</div>';
+        return;
+    }
+
+    // a reslime only wraps the original post, so show the original and its replies
+    const slime = found.reslimed_status || found;
+    const replies = await getReplies(slime.id_str || id);
+
+    mainDiv.append(createSlimeCard(slime, true));
 
     const repliesDiv = document.querySelector("#replies");
     for (const reply of replies) {

@@ -57,6 +57,14 @@ export function createSlime(slime) {
     // slime ID for linking to slime trail page 
     const slimeId = slime.id_str || slime.id || ""; 
 
+    // a reslime shows the original post, so its slime trail is the original's trail
+    const trailId = (slime.reslimed_status && slime.reslimed_status.id_str) || slimeId; 
+
+    // the reply count links to the slime trail page (slime.html) for this slime
+    const replyHtml = trailId 
+        ? `<a href="slime.html?id=${trailId}" class="text-muted text-decoration-none" title="View slime trail"><i class="bi bi-chat"></i> ${slime.reply_count ?? 0}</a>`
+        : `<span><i class="bi bi-chat"></i> ${slime.reply_count ?? 0}</span>`; 
+
     // card element construction 
     const card = document.createElement('div'); 
     card.className = "card mb-3 shadow-sm"; 
@@ -86,7 +94,7 @@ export function createSlime(slime) {
                 </div>
                 <p class="mb-2 text-dark">${slimeText}</p>
                 <div class="d-flex text-muted small gap-4 mt-2">
-                    <span><i class="bi bi-chat"></i> ${slime.reply_count ?? 0}</span>
+                    ${replyHtml}
                     <span><i class="bi bi-arrow-repeat"></i> ${slime.reslime_count ?? 0}</span>
                     <span><i class="bi bi-heart"></i> ${slime.favorite_count ?? 0}</span>
                 </div>
