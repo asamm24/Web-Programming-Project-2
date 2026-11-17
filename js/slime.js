@@ -35,12 +35,12 @@ export function createSlime(slime) {
     // extract the author data 
     const user = slime.user || {}; 
     const name = user.name || "Anonymous Slug"; 
-    const rawScreenName = user.screen_name || "unkown"; 
+    const rawScreenName = user.screen_name || "unknown"; 
     const screenName = rawScreenName.startsWith('@') ? rawScreenName : `@${rawScreenName}`; 
     const cleanScreenName = rawScreenName.replace('@', '').toLowerCase(); 
 
     // profile HTML link 
-    const profileLink = profilePageMap[screenName] || profilePageMap[cleanScreenName] || "#"; 
+    const profileLink = profilePageMap[screenName] || profilePageMap[cleanScreenName] || null; 
 
     // avatar url 
     let avatarUrl = user.profile_image_url || avatarMap[cleanScreenName] || "assets/profile/kevin.jpeg"; 
@@ -61,30 +61,38 @@ export function createSlime(slime) {
     const card = document.createElement('div'); 
     card.className = "card mb-3 shadow-sm"; 
     if (slimeId) {
-        card.dataset.slimeID = slimeId; 
+        card.dataset.slimeId = slimeId; 
     }
+
+    // render links only when a valid page exists 
+    const avatarHtml = profileLink 
+        ? `<a href="${profileLink}"> <img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${name}"></a>`
+        : `<img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${name}">`;
+
+    const authorHtml = profileLink 
+        ? `<a href="${profileLink}" class="text-dark fw-bold text-decoration-none"> ${name} </a>
+           <a href="${profileLink}" class="text-muted text-decoration-none ms-1"> ${screenName} </a>`
+        : `<span class="text-dark fw-bold"> ${name} </span>
+           <span class="text-muted ms-1"> ${screenName} </span>`;
 
     // matching card inner structure with bootstrap to profile.js 
     card.innerHTML = `
         <div class="card-body d-flex align-items-start p-3">
-        <a href="${profileLink}">
-            <img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${name}">
-        </a>
-        <div class="flex-grow-1">
-            <div class="mb-1">
-            <a href="${profileLink}" class="text-dark fw-bold text-decoration-none">${name}</a>
-            <a href="${profileLink}" class="text-muted text-decoration-none ms-1">${screenName}</a>
-            ${slime.created_at ? `<small class="text-muted ms-2">· ${slime.created_at.split(' ').slice(1, 3).join(' ')}</small>` : ''}
-            </div>
-            <p class="mb-2 text-dark">${slimeText}</p>
-            <div class="d-flex text-muted small gap-4 mt-2">
-            <span><i class="bi bi-chat"></i> ${slime.reply_count ?? 0}</span>
-            <span><i class="bi bi-arrow-repeat"></i> ${slime.reslime_count ?? 0}</span>
-            <span><i class="bi bi-heart"></i> ${slime.favorite_count ?? 0}</span>
+            ${avatarHtml}
+            <div class="flex-grow-1">
+                <div class="mb-1">
+                    ${authorHtml}
+                    ${slime.created_at ? `<small class="text-muted ms-2">· ${slime.created_at.split(' ').slice(1, 3).join(' ')}</small>` : ''}
+                </div>
+                <p class="mb-2 text-dark">${slimeText}</p>
+                <div class="d-flex text-muted small gap-4 mt-2">
+                    <span><i class="bi bi-chat"></i> ${slime.reply_count ?? 0}</span>
+                    <span><i class="bi bi-arrow-repeat"></i> ${slime.reslime_count ?? 0}</span>
+                    <span><i class="bi bi-heart"></i> ${slime.favorite_count ?? 0}</span>
+                </div>
             </div>
         </div>
-        </div>
-    `; 
+    `;
 
     return card; 
 
