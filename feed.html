@@ -24,6 +24,9 @@
                         <a class="nav-link active" href="feed.html">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#composeModal"> Compose </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="notifications.html">Notifications</a>
                     </li>
                     <!-- Dropdown for the 4 profiles -->
@@ -42,6 +45,25 @@
             </div>
         </div>
     </nav>
+
+ <!-- Modal Added -->
+     <div class="modal fade" id="composeModal" tabindex="-1" role="dialog" aria-labelledby="composeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h2 class="modal-title" id="composeModalLabel">Compose Slime</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="3" placeholder="Compose Slime" aria-label="Compose Slime"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-sm">Slime <i class="bi bi-arrow-right-circle"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Main grid setup so the feed looks good on both desktop and mobile -->
     <main class="container">
