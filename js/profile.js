@@ -4,7 +4,7 @@
  */
 
 import { getUserProfile, getUserTimeline, getUserFavorites } from "./api.js";
-import { parseHTML } from "../html-utils.js";
+import { createSlime } from "./slime.js";
 
 /**
  * Loads and also renders a users profile header, timeline, replies, and favorites data inthe skeleton
@@ -46,13 +46,18 @@ export async function loadProfile(username) {
         const nameHeading = textContainer.querySelector("h1");
         const usernameSpan = textContainer.querySelector(".text-muted.lead");
         const bioParagraph = textContainer.querySelector("p.mb-3");
-        const joinedDiv = textContainer.querySelector(".text-muted i.bi-calendar3")?.parentElement;
-        const statsDiv = textContainer.querySelectorAll(".text-muted")[1];
+        const mutedDivs = textContainer.querySelectorAll("div.text-muted");
+        const joinedDiv = Array.from(mutedDivs).find((div) =>
+            div.querySelector("i.bi-calendar3")
+        );
+        const statsDiv = Array.from(mutedDivs).find((div) =>
+            !div.querySelector("i.bi-calendar3")
+        );
 
         if (nameHeading) nameHeading.textContent = profileData.name;
         if (usernameSpan) usernameSpan.textContent = profileData.screen_name.startsWith('@') ? profileData.screen_name : `@${profileData.screen_name}`;
         if (bioParagraph) bioParagraph.textContent = profileData.description;
-        if (joinedDiv) joinedDiv.innerHTML = `<i class="bi bi-calendar3"></i> Joined ${profileData.created_at || 'August 2021'}`;
+        if (joinedDiv) joinedDiv.innerHTML = `<i class="bi bi-calendar3"></i> Joined ${profileData.created || "Unknown"}`;
         if (statsDiv) {
             statsDiv.innerHTML = `
                 <span class="me-3"><strong>${profileData.friends_count ?? 0}</strong> Following</span>
@@ -61,54 +66,7 @@ export async function loadProfile(username) {
         }
     }
 
-    // 4. Helper function to build an interactive slime card with avatar and interconnected profile link
-    const createSlimeCard = (slime) => {
-        const user = slime.user || {};
-        const name = user.name || profileData.name;
-        const screenName = user.screen_name || profileData.screen_name;
-        
-        // resolution for standard posts and nested reslimes
-        const slimeText = slime.full_text 
-            || slime.text 
-            || (slime.reslimed_status && (slime.reslimed_status.full_text || slime.reslimed_status.text)) 
-            || "";
-        
-        // Map screen names to profile HTML filenames for interconnected navigation
-        const profilePageMap = {
-            "@kevinaangstadt": "kevin.html",
-            "kevinaangstadt": "kevin.html",
-            "@ed": "ed.html",
-            "ed": "ed.html",
-            "@ltorrey": "lisa.html",
-            "ltorrey": "lisa.html",
-            "@choongsool": "lee.html",
-            "choongsool": "lee.html"
-        };
-        
-        const profileFile = profilePageMap[screenName] || profilePageMap[screenName.toLowerCase()] || "kevin.html";
-
-        let avatarUrl = user.profile_image_url || `assets/profile/${avatarFile}`;
-        if (avatarUrl.startsWith("/")) {
-            avatarUrl = avatarUrl.substring(1);
-        }
-
-        return `
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body d-flex align-items-start p-3">
-                    <img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${name}">
-                    <div class="flex-grow-1">
-                        <div class="mb-1">
-                            <a href="${profileFile}" class="text-dark fw-bold text-decoration-none">${name}</a>
-                            <a href="${profileFile}" class="text-muted text-decoration-none ms-1">${screenName}</a>
-                        </div>
-                        <p class="mb-2 text-dark">${slimeText}</p>
-                    </div>
-                </div>
-            </div>
-        `;
-    };
-
-    // 5. Populate the Slimes Tab (#slimes)
+    // 4. Populate the Slimes Tab (#slimes)
     const slimesTab = document.querySelector("#slimes");
     if (slimesTab && Array.isArray(timelineData)) {
         slimesTab.innerHTML = ""; 
@@ -116,33 +74,33 @@ export async function loadProfile(username) {
         const slimesToRender = originalSlimes.length > 0 ? originalSlimes : timelineData;
         
         slimesToRender.forEach(slime => {
-            slimesTab.appendChild(parseHTML(createSlimeCard(slime)));
+            slimesTab.appendChild(createSlime(slime));
         });
     }
 
-    // 6. Populate the Slimes and Replies Tab (#replies)
+    // 5. Populate the Slimes and Replies Tab (#replies)
     const repliesTab = document.querySelector("#replies");
     if (repliesTab && Array.isArray(timelineData)) {
         repliesTab.innerHTML = "";
         timelineData.forEach(slime => {
-            repliesTab.appendChild(parseHTML(createSlimeCard(slime)));
+            repliesTab.appendChild(createSlime(slime));
         });
     }
 
-    // 7. Populate the Favorites Tab (#favorites)
+    // 6. Populate the Favorites Tab (#favorites)
     const favoritesTab = document.querySelector("#favorites");
     if (favoritesTab) {
         favoritesTab.innerHTML = "";
         if (Array.isArray(favoritesData) && favoritesData.length > 0) {
             favoritesData.forEach(slime => {
-                favoritesTab.appendChild(parseHTML(createSlimeCard(slime)));
+                favoritesTab.appendChild(createSlime(slime));
             });
         } else {
             favoritesTab.innerHTML = `<p class="text-muted p-3 text-center">No favorites found.</p>`;
         }
     }
 
-    // 8. Bootstrap Tab Switching Visibility Logic
+    // 7. Bootstrap Tab Switching Visibility Logic
     const tabButtons = document.querySelectorAll('button[data-bs-toggle="pill"]');
     tabButtons.forEach(button => {
         button.addEventListener("click", (event) => {
