@@ -1,85 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SlugFest | Home</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Grabbing Bootstrap 5 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+        <title>Slugfest</title>
+    </head>
     
-    <!-- Grabbing Bootstrap 5 so we don't have to write CSS from scratch -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-</head>
-<body class="bg-light">
-
-    <!-- Navbar, I linked this to the notifications page and put the profile pages in a dropdown -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="feed.html">🐌 SlugFest</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="feed.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#composeModal"> Compose </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="notifications.html">Notifications</a>
-                    </li>
-                    <!-- Dropdown for the 4 profiles -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
-                            Profiles
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="kevin.html">Kevin Angstadt</a></li>
-                            <li><a class="dropdown-item" href="ed.html">Ed Harcourt</a></li>
-                            <li><a class="dropdown-item" href="lee.html">Choong-Soo Lee</a></li>
-                            <li><a class="dropdown-item" href="lisa.html">Lisa Torrey</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
- <!-- Modal Added -->
-     <div class="modal fade" id="composeModal" tabindex="-1" role="dialog" aria-labelledby="composeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h2 class="modal-title" id="composeModalLabel">Compose Slime</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <textarea class="form-control" rows="3" placeholder="Compose Slime" aria-label="Compose Slime"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary btn-sm">Slime <i class="bi bi-arrow-right-circle"></i></button>
+    <!-- Added pt-5  -->
+    <body class="pt-5">
+        
+        <!-- Navbar setup -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="feed.html">SlugFest</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="feed.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Compose</a>
+                        </li>
+                        
+                        <!-- single profile link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="profile.html">Profile</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="notifications.html">Notifications</a>
+                        </li>
+                    </ul>
+                    
+                    <!-- search bar  -->
+                    <form class="d-flex">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        </div>
+                        <button type="button" class="btn btn-info" aria-label="Submit Search"><i class="bi bi-chevron-bar-right"></i></button> 
+                    </form>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- Main grid setup so the feed looks good on both desktop and mobile -->
-    <main class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <h3 class="mb-4 fw-bold text-dark">Home Feed</h3>
-                
-                <!-- loop through the data and dump the slime cards right here. -->
-                <div id="feed-container"></div>
+        </nav>
+
+        <!-- Main grid setup -->
+        <div class="container justify-content-md-center align-self-center mt-4">
+            <div class="container justify-content-center row mb-5">
+                <div class="col-md-8">
+                    <h1 class="text-center mb-5">Welcome to SlugFest</h1>
+
+                    <!-- The compose box -->
+                    <div class="container row m-3 pb-3 border-bottom">
+                        <div class="col-2">
+                            <img src="./assets/profile/kevin.jpeg" alt="Current User" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="col-10">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Compose Slime" id="slimeCompose" style="height:5rem;"></textarea>
+                                <label for="slimeCompose">Compose Slime</label>
+                            </div>
+                            <div class="d-flex gap-2 justify-content-end mt-2">
+                                <a href="#" class="btn btn-primary">Slime <i class="bi bi-arrow-right-circle"></i></a>  
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- dump the slime cards right here -->
+                    <div id="feed-container"></div>
+                </div>
             </div>
         </div>
-    </main>
-
-    <!-- Bootstrap JS so the profile dropdown clicks open -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script type="module" src="js/feed.js"></script>
-</body>
+        
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        
+        <!-- Hooking up the JS module to load the API data -->
+        <script type="module" src="js/feed.js"></script>
+    </body>
 </html>

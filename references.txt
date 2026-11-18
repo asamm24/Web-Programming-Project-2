@@ -41,3 +41,9 @@ Websites
 - MDN, Date.prototype.toLocaleString (showing the date on each slime): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
 Claude Code
 - After I created slime.html, I used Claude Code to help fix it, including the navbar overlapping the top of the page content and the navbar links on the page not working.
+
+Justin:
+Bootstrap 5.3 documentation: for navbar and dropdown menu https://getbootstrap.com/docs/5.3/getting-started/introduction/
+Bootstrap icons: visual UI elements https://icons.getbootstrap.com
+MDN, Fetch API for structuring https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+MDN, JavaScript for how to link in HTML  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
