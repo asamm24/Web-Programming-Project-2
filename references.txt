@@ -42,6 +42,16 @@ Websites
 Claude Code
 - After I created slime.html, I used Claude Code to help fix it, including the navbar overlapping the top of the page content and the navbar links on the page not working.
 
+Eszter:
+
+created profile.js, api.js, kevin.html, ed.html, lisa.html, lee.html
+Angstadt, K. CS-332 Web Programming, Fall 2026. Project 2 specification, skeleton HTML files, API JSON data and profile images (p2_assets.zip). https://myslu.stlawu.edu/~kangstadt/teaching/fall26/332/p2.html
+Angstadt, K. CS-332 lecture notes and in-class examples (html-utils.js: parseHTML, wait).
+Bootstrap
+I also used gemini to understand how async, await and fetch() works to use them efficiently and correctly in the project
+
+
+
 Justin:
 Bootstrap 5.3 documentation: for navbar and dropdown menu https://getbootstrap.com/docs/5.3/getting-started/introduction/
 Bootstrap icons: visual UI elements https://icons.getbootstrap.com
