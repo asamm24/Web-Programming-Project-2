@@ -60,8 +60,8 @@ function createNotificationCard(item) {
 
     // render links only when a valid page exists 
     const avatarHtml = profileLink 
-        ? `<a href="${profileLink}"> <img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${name}"></a>`
-        : `<img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${name}">`;
+        ? `<a href="${profileLink}"> <img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${actorName}"></a>`
+        : `<img src="${avatarUrl}" class="rounded-circle me-3 border" width="48" height="48" alt="${actorName}">`;
 
     const actorNameHtml = profileLink 
         ? `<a href="${profileLink}" class="text-dark fw-bold text-decoration-none">${actorName}</a>`

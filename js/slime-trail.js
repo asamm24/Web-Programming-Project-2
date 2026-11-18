@@ -5,6 +5,17 @@
 
 // ----- getting the data -----
 
+const profilePageMap = {
+    "@kevinaangstadt": "kevin.html",
+    "kevinaangstadt": "kevin.html",
+    "@ed": "ed.html",
+    "ed": "ed.html",
+    "@ltorrey": "lisa.html",
+    "ltorrey": "lisa.html",
+    "@choongsool": "lee.html",
+    "choongsool": "lee.html"
+};
+
 // get one slime from the api folder (null if there is no slime with that id)
 async function getSlime(id) {
     const response = await fetch("api/statuses/show/" + id + ".json");
@@ -36,14 +47,29 @@ function createSlimeCard(slime, isMain) {
     // the json has a "/" at the start of the picture path, take it off
     const picture = slime.user.profile_image_url.substring(1);
     const date = new Date(slime.created_at).toLocaleString();
+    const rawScreenName = slime.user.screen_name || "";
+    const screenName = rawScreenName.startsWith("@")
+        ? rawScreenName
+        : `@${rawScreenName}`;
+    const profileLink = profilePageMap[screenName] || profilePageMap[rawScreenName] || null;
+    const avatar = `<img src="${picture}" class="rounded-circle me-3" width="48" height="48" alt="${slime.user.name}">`;
+    const author = profileLink
+        ? `<a href="${profileLink}" class="text-dark text-decoration-none"><strong>${slime.user.name}</strong></a>
+           <a href="${profileLink}" class="text-muted text-decoration-none">${screenName}</a>`
+        : `<strong>${slime.user.name}</strong> <span class="text-muted">${screenName}</span>`;
+    const linkedText = slime.text.replace(/@[A-Za-z0-9_]+/g, (mention) => {
+        const mentionLink = profilePageMap[mention.toLowerCase()];
+        return mentionLink
+            ? `<a href="${mentionLink}" class="text-dark text-decoration-none">${mention}</a>`
+            : mention;
+    });
 
     card.innerHTML = `
         <div class="card-body d-flex">
-            <img src="${picture}" class="rounded-circle me-3" width="48" height="48" alt="${slime.user.name}">
+            ${profileLink ? `<a href="${profileLink}">${avatar}</a>` : avatar}
             <div>
-                <strong>${slime.user.name}</strong>
-                <span class="text-muted">${slime.user.screen_name}</span>
-                <p>${slime.text}</p>
+                ${author}
+                <p>${linkedText}</p>
                 <small class="text-muted">${date}</small>
                 <div class="text-muted small mt-2">
                     <i class="bi bi-chat"></i> ${slime.reply_count}
