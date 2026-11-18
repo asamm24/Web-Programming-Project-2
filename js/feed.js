@@ -42,4 +42,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Slap the finished DOM element onto my feed page container
         feedContainer.appendChild(slimeNode);
     });
+    
+    // Clear the compose box when the blue Slime button is clicked
+    const slimeBtn = document.getElementById('slimeBtn');
+    const composeBox = document.getElementById('slimeCompose');
+
+    if (slimeBtn && composeBox) {
+        slimeBtn.addEventListener('click', (e) => {
+            e.preventDefault();    // Stops the page from jumping back to the top
+            composeBox.value = ''; // Wipes the text clean so it feels like it actually posted
+        });
+    }
+
 });
