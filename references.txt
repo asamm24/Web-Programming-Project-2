@@ -47,7 +47,7 @@ Eszter:
 created profile.js, api.js, kevin.html, ed.html, lisa.html, lee.html
 Angstadt, K. CS-332 Web Programming, Fall 2026. Project 2 specification, skeleton HTML files, API JSON data and profile images (p2_assets.zip). https://myslu.stlawu.edu/~kangstadt/teaching/fall26/332/p2.html
 Angstadt, K. CS-332 lecture notes and in-class examples (html-utils.js: parseHTML, wait).
-Bootstrap
+Bootstrap 5.3 documentation for navbar
 I also used gemini to understand how async, await and fetch() works to use them efficiently and correctly in the project
 
 
